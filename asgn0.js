@@ -14,8 +14,14 @@ function main() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const button = document.getElementById("draw");
-  button.addEventListener("click", handleDrawEvent);
+  const drawButton = document.getElementById("draw");
+  drawButton.addEventListener("click", handleDrawEvent);
+
+  const operationButton = document.getElementById("draw-operation");
+  operationButton.addEventListener("click", handleDrawOperationEvent);
+
+  let v1 = new Vector3([1,2,3]);
+  console.log(v1.magnitude());
 }
 
 function handleDrawEvent() {
@@ -28,6 +34,44 @@ function handleDrawEvent() {
 
   drawVector(v1, "red");
   drawVector(v2, "blue");
+
+  return [v1, v2];
+}
+
+function handleDrawOperationEvent() {
+  const [v1, v2] = handleDrawEvent();
+  let v1temp = new Vector3(v1.elements);
+  let v2temp = new Vector3(v2.elements);
+
+  const selectElement = document.getElementById("operation");
+  const operation = selectElement.value;
+
+  const scalarElement = document.getElementById("scalar");
+  const scalar = scalarElement.value;
+
+  let v3, v4;
+  switch(operation) {
+    case "add":
+      v3 = v1temp.add(v2temp);
+      break;
+
+    case "sub":
+      v3 = v1temp.sub(v2temp);
+      break;
+
+    case "mul":
+      v3 = v1temp.mul(scalar);
+      v4 = v2temp.mul(scalar);
+      break;
+
+    case "div":
+      v3 = v1temp.div(scalar);
+      v4 = v2temp.div(scalar);
+      break;
+  }
+
+  if (v3) drawVector(v3, "green");
+  if (v4) drawVector(v4, "green");
 }
 
 function drawVector(v, color) {
@@ -51,6 +95,6 @@ function getInputVector(div) {
 
   const x = xElement.value ? xElement.value : 0;
   const y = yElement.value ? yElement.value : 0;
-  
+
   return new Vector3([x, y, 0]);
 }
