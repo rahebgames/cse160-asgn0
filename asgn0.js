@@ -69,6 +69,10 @@ function handleDrawOperationEvent() {
     case "ang":
       console.log("Angle: ", angleBetween(v1temp, v2temp));
       break;
+
+    case "are":
+      console.log("Area of the triangle: ", Vector3.cross(v1temp, v2temp).magnitude() / 2.0);
+      break;
     
     case "mag":
       console.log("Magnitude v1: ", v1temp.magnitude());
