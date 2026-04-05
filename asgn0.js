@@ -19,9 +19,6 @@ function main() {
 
   const operationButton = document.getElementById("draw-operation");
   operationButton.addEventListener("click", handleDrawOperationEvent);
-
-  let v1 = new Vector3([1,2,3]);
-  console.log(v1.magnitude());
 }
 
 function handleDrawEvent() {
@@ -67,6 +64,16 @@ function handleDrawOperationEvent() {
     case "div":
       v3 = v1temp.div(scalar);
       v4 = v2temp.div(scalar);
+      break;
+    
+    case "mag":
+      console.log(v1temp.magnitude());
+      console.log(v2temp.magnitude());
+      break;
+
+    case "nor":
+      v3 = v1temp.normalize();
+      v4 = v2temp.normalize();
       break;
   }
 
