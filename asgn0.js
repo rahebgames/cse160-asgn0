@@ -65,10 +65,14 @@ function handleDrawOperationEvent() {
       v3 = v1temp.div(scalar);
       v4 = v2temp.div(scalar);
       break;
+
+    case "ang":
+      console.log("Angle: ", angleBetween(v1temp, v2temp));
+      break;
     
     case "mag":
-      console.log(v1temp.magnitude());
-      console.log(v2temp.magnitude());
+      console.log("Magnitude v1: ", v1temp.magnitude());
+      console.log("Magnitude v2: ", v2temp.magnitude());
       break;
 
     case "nor":
@@ -104,4 +108,13 @@ function getInputVector(div) {
   const y = yElement.value ? yElement.value : 0;
 
   return new Vector3([x, y, 0]);
+}
+
+function angleBetween(v1, v2) {
+  const angleRads = Math.acos(Vector3.dot(v1, v2) / (v1.magnitude() * v2.magnitude()));
+  return radToDeg(angleRads);
+}
+
+function radToDeg(rad) {
+  return rad * (180 / Math.PI);
 }
